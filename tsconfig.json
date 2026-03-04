@@ -24,7 +24,13 @@
       }
     ],
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./app/*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",

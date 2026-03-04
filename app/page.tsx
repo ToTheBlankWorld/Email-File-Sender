@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 import LogoutButton from './components/LogoutButton';
+import { FileUpload } from '@/components/ui/file-upload';
+import { Button as StatefulButton } from '@/components/ui/stateful-button';
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -15,8 +18,7 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setError('');
     setMessage('');
     setLoading(true);
@@ -58,20 +60,16 @@ export default function Home() {
         <LogoutButton />
       </div>
 
-      {/* Animated gradient background */}
-      <div className="fixed inset-0 z-0">
-        <motion.div
-          className="absolute left-0 top-0 h-96 w-96 rounded-full bg-violet-500/20 blur-3xl"
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 20, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"
-          animate={{ x: [0, -50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 25, repeat: Infinity }}
-        />
-        <div className="absolute inset-0 bg-grid-dark [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-      </div>
+      {/* Grid Background */}
+      <div
+        className={cn(
+          "absolute inset-0",
+          "[background-size:40px_40px]",
+          "[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]",
+        )}
+      />
+      {/* Radial gradient fade */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
 
       {/* Content */}
       <motion.div
@@ -80,17 +78,24 @@ export default function Home() {
         transition={{ duration: 0.6 }}
         className="relative z-10 w-full max-w-md"
       >
-        {/* Glassmorphism Card */}
-        <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-white/10 to-white/5 p-8 backdrop-blur-2xl shadow-2xl">
+        {/* Claymorphism Card */}
+        <div
+          className="rounded-3xl p-8 backdrop-blur-2xl"
+          style={{
+            background: 'linear-gradient(145deg, rgba(20, 30, 60, 0.85), rgba(10, 15, 35, 0.9))',
+            border: '1px solid rgba(59, 130, 246, 0.15)',
+            boxShadow: '12px 12px 30px rgba(0, 0, 0, 0.5), -6px -6px 20px rgba(30, 58, 138, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 -1px 0 rgba(0, 0, 0, 0.2)',
+          }}
+        >
           {/* Header */}
           <div className="mb-8 text-center">
-            <h1 className="bg-gradient-to-r from-white to-blue-100 bg-clip-text text-3xl font-bold text-transparent mb-2">
+            <h1 className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-3xl font-bold text-transparent mb-2">
               Send Email
             </h1>
             <p className="text-neutral-400 text-sm">Send emails with attachments securely</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-5">
             {/* Name Input */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-white">Name</label>
@@ -100,7 +105,12 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="John Doe"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition"
+                className="w-full px-4 py-3 rounded-lg text-white placeholder-neutral-500 focus:outline-none transition"
+                style={{
+                  background: '#000000',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  boxShadow: 'inset 2px 2px 6px rgba(0, 0, 0, 0.5)',
+                }}
               />
             </div>
 
@@ -113,7 +123,12 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="you@example.com"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition"
+                className="w-full px-4 py-3 rounded-lg text-white placeholder-neutral-500 focus:outline-none transition"
+                style={{
+                  background: '#000000',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  boxShadow: 'inset 2px 2px 6px rgba(0, 0, 0, 0.5)',
+                }}
               />
             </div>
 
@@ -126,26 +141,19 @@ export default function Home() {
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="Email subject"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition"
+                className="w-full px-4 py-3 rounded-lg text-white placeholder-neutral-500 focus:outline-none transition"
+                style={{
+                  background: '#000000',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  boxShadow: 'inset 2px 2px 6px rgba(0, 0, 0, 0.5)',
+                }}
               />
             </div>
 
             {/* File Upload */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-white">Attachment (Optional)</label>
-              <label className="flex items-center justify-center px-4 py-6 rounded-lg border-2 border-dashed border-white/20 hover:border-violet-400 transition cursor-pointer bg-white/5 hover:bg-white/10">
-                <div className="text-center">
-                  <p className="text-sm text-neutral-400">
-                    {file ? file.name : 'Click to upload or drag and drop'}
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-1">Max 25MB</p>
-                </div>
-                <input
-                  type="file"
-                  onChange={(e) => setFile(e.target.files?.[0] || null)}
-                  className="hidden"
-                />
-              </label>
+              <FileUpload onChange={(files) => setFile(files[0] || null)} />
             </div>
 
             {/* Messages */}
@@ -169,17 +177,15 @@ export default function Home() {
               </motion.div>
             )}
 
-            {/* Submit Button */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-blue-600 hover:shadow-lg hover:shadow-violet-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            {/* Submit Button — Green StatefulButton */}
+            <StatefulButton
+              onClick={handleSubmit}
+              disabled={loading || !formData.name || !formData.email || !formData.subject}
+              className="w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Sending...' : 'Send Email'}
-            </motion.button>
-          </form>
+              Send Email
+            </StatefulButton>
+          </div>
 
           {/* Footer */}
           <p className="text-xs text-neutral-500 text-center mt-6">

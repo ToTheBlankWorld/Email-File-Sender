@@ -16,26 +16,22 @@
     --foreground: 0 0% 98%;
     --card: 0 0% 10.2%;
     --card-foreground: 0 0% 98%;
-    --primary: 142 76% 36%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     --secondary: 214 88% 51%;
     --muted: 215 16% 46.9%;
     --muted-foreground: 215 14% 65%;
-    --accent: 16 100% 50%;
+    --accent: 210 100% 50%;
     --destructive: 0 84% 60%;
   }
 }
 
 @layer utilities {
   .bg-grid-dark {
-    background-image: linear-gradient(
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px),
+      linear-gradient(90deg,
         rgba(0, 0, 0, 0.1) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.1) 1px,
-        transparent 1px
-      );
+        transparent 1px);
   }
 }
