@@ -41,13 +41,13 @@ Infrastructure:
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  User Visits Application                         │
+│  User Visits Application                        │
 └────────────────────┬────────────────────────────┘
                      │
                      ▼
         ┌────────────────────────┐
-        │ License Gate Middleware │
-        │ (Checks localStorage)    │
+        │ License Gate Middleware│
+        │ (Checks localStorage)  │
         └────────────────────────┘
                      │
           ┌──────────┴──────────┐
@@ -56,7 +56,7 @@ Infrastructure:
           │                     │
           ▼                     ▼
     ┌─────────────┐      ┌──────────────────┐
-    │ Email Sender │      │ License Verify   │
+    │ Email Sender│      │ License Verify   │
     │ Form Page   │      │ Page             │
     └─────────────┘      └────────┬─────────┘
           │                       │
